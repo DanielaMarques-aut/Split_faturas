@@ -78,11 +78,11 @@ def load_faturas(path):
         val = str(main_ws.cell(row=1, column=col).value or "").strip().upper()
         if val:
             if headers is None:
-                headers = {}
+                headers: None|dict[int, str] = {}
             headers[col] = main_ws.cell(row=1, column=col).value
 
     # Find key columns
-    for col, name in headers.items():
+    for col, name in (headers or {}).items():
         n = str(name).strip().upper()
         if "WBS" in n:
              wbs_col = col
